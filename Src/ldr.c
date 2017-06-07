@@ -1,9 +1,3 @@
-/*
- * ldr.c
- *
- *  Created on: 6 de jun. de 2017
- *      Author: Mario
- */
 #include "ldr.h"
 #include "FreeRTOSConfig.h"
 #include <projdefs.h>
@@ -35,8 +29,8 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
 void vLdrCode(void * pvParameters) {
 	for (;;) {
 		/* Task code goes here. */
-		HAL_ADC_ConvCpltCallback(&hadc);
-		vTaskDelay(pdMS_TO_TICKS(250));
+		HAL_ADC_Start_IT(&hadc);
+		vTaskDelay(pdMS_TO_TICKS(5000));
 	}
 }
 

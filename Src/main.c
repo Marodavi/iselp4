@@ -53,9 +53,9 @@
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
-//ADC_HandleTypeDef hadc;
+ADC_HandleTypeDef hadc;
 
-//TIM_HandleTypeDef htim3;
+TIM_HandleTypeDef htim3;
 
 osThreadId defaultTaskHandle;
 
@@ -81,7 +81,7 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
-static TickType_t timer_endtime;
+TickType_t timer_endtime;
 static void timer_start(int ms) {
 	TickType_t time = pdMS_TO_TICKS(ms);
 	timer_endtime = xTaskGetTickCount();
@@ -143,8 +143,9 @@ int main(void)
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
-  //vLed();
+  vLed();
   vLdr();
+
   /* USER CODE END RTOS_THREADS */
 
   /* USER CODE BEGIN RTOS_QUEUES */
@@ -251,14 +252,6 @@ static void MX_ADC_Init(void)
   sConfig.Channel = ADC_CHANNEL_2;
   sConfig.Rank = ADC_RANK_CHANNEL_NUMBER;
   sConfig.SamplingTime = ADC_SAMPLETIME_239CYCLES_5;
-  if (HAL_ADC_ConfigChannel(&hadc, &sConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
-    /**Configure for the selected ADC regular channel to be converted. 
-    */
-  sConfig.Channel = ADC_CHANNEL_VREFINT;
   if (HAL_ADC_ConfigChannel(&hadc, &sConfig) != HAL_OK)
   {
     Error_Handler();
