@@ -35,7 +35,7 @@ endif
 all: ISEL4.elf
 
 # Tool invocations
-ISEL4.elf: $(OBJS) $(USER_OBJS)
+ISEL4.elf: $(OBJS) $(USER_OBJS) ../STM32F051R8Tx_FLASH.ld
 	@echo 'Building target: $@'
 	@echo 'Invoking: MCU GCC Linker'
 	arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -specs=nosys.specs -specs=nano.specs -T"../STM32F051R8Tx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -lm -o "ISEL4.elf" @"objects.list" $(USER_OBJS) $(LIBS)

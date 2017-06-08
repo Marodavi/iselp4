@@ -7,9 +7,10 @@
 
 #define VREFINT_CAL_ADDR ((uint16_t*)((uint32_t) 0x1FFFF7BA))
 int adecerrao0,adecerrao1;
- int ADC_raw[2];
- float Vdd;
- unsigned char i=0;
+int ADC_raw[2];
+float Vdd;
+unsigned char i=0;
+
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
 
 	if (__HAL_ADC_GET_FLAG(hadc, ADC_FLAG_EOC)) {
@@ -27,10 +28,11 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
 
 
 void vLdrCode(void * pvParameters) {
+	HAL_ADC_Start_IT(&hadc);
 	for (;;) {
 		/* Task code goes here. */
 		HAL_ADC_Start_IT(&hadc);
-		vTaskDelay(pdMS_TO_TICKS(5000));
+		vTaskDelay(pdMS_TO_TICKS(1000));
 	}
 }
 

@@ -18,7 +18,6 @@ int pwm=0;
 void pwm_led(){
 	pwm= LOW;
   __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_3, pwm); //update pwm value
-
 }
 
 void vLedCode(void * pvParameters) {
@@ -37,6 +36,6 @@ void vLedCode(void * pvParameters) {
 			"Led", /* Text name for the task. */
 			configMINIMAL_STACK_SIZE, /* Stack size in words, not bytes. */
 			( void * ) 1, /* Parameter passed into the task. */
-			osPriorityAboveNormal,/* Priority at which the task is created. */
+			osPriorityRealtime,/* Priority at which the task is created. */
 			NULL); /* Used to pass out the created task's handle. */
 }
